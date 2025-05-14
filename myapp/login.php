@@ -30,7 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $hashedPassword)) {
                 $_SESSION['user_id'] = $id;
                 $_SESSION['user_name'] = $name;
-                header("Location: home.php");
+                $_SESSION['user_email'] = $email;
+
+                if ($email === 'admin@example.com') {
+                    header("Location: admin-dashbord.php");
+                } else {
+                    header("Location: home.php");
+                }
                 exit();
             } else {
                 $loginErr = "Invalid password.";
